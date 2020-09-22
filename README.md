@@ -1,6 +1,6 @@
 # Agendamento-Online (projeto faculdade - poo)
 
-Agendamento clinico online :
+Aplicativo de Agendamento clinico online :
   * Paciente:
     * Cria consulta
     * Visualiza consulta
