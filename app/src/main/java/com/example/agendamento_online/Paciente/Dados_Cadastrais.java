@@ -1,77 +1,78 @@
-package com.example.agendamento_online;
+package com.example.agendamento_online.Paciente;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.agendamento_online.Model.Medico;
+import com.example.agendamento_online.Home;
 import com.example.agendamento_online.Model.Paciente;
+import com.example.agendamento_online.R;
+import com.example.agendamento_online.authentication.Conexao;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.UUID;
-
-public class Registro_Paciente extends AppCompatActivity {
+public class Dados_Cadastrais extends AppCompatActivity {
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    FirebaseAuth auth;
+    FirebaseUser user;
 
-    EditText nome, sobrenome, cpf,celular, email, senha;
+    EditText nome, sobrenome, cpf,celular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro__paciente);
-
-         nome =  findViewById(R.id.nome);
-         sobrenome =  findViewById(R.id.sobrenome);
-         cpf = findViewById(R.id.cpf);
-         celular = findViewById(R.id.celular);
-         email =  findViewById(R.id.email);
-         senha = findViewById(R.id.senha);
+        setContentView(R.layout.activity_dados__cadastrais);
 
         inicializarFirebase();
 
-        Button cadastrar = (Button) findViewById(R.id.cadastrar);
+        nome =  findViewById(R.id.nome);
+        sobrenome =  findViewById(R.id.sobrenome);
+        cpf = findViewById(R.id.cpf);
+        celular = findViewById(R.id.celular);
 
-        cadastrar.setOnClickListener(new View.OnClickListener() {
+        Button inserir = (Button) findViewById(R.id.inserir);
+
+        inserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cadastrando();
-
-                Intent voltarInicio = new Intent(Registro_Paciente.this, MainActivity.class);
-                startActivity(voltarInicio);
+                cadastrarDados();
+                Intent perfil = new Intent(Dados_Cadastrais.this, Home.class);
+                startActivity(perfil);
             }
         });
-
     }
 
     private void inicializarFirebase() {
-        FirebaseApp.initializeApp(Registro_Paciente.this);
+        FirebaseApp.initializeApp(Dados_Cadastrais.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
 
-    public void cadastrando() {
+    protected void onStart() {
+        super.onStart();
+        auth = Conexao.getFirebaseAuth();
+        user =  Conexao.getFirebaseUser();
+    }
+
+    private void cadastrarDados() {
         Paciente paciente = new Paciente();
 
-        paciente.setId(UUID.randomUUID().toString());
+        paciente.setId(user.getUid());
         paciente.setNome(nome.getText().toString());
         paciente.setSobrenome(sobrenome.getText().toString());
         paciente.setCpf(cpf.getText().toString()); //atributo de paciente
         paciente.setCelular(celular.getText().toString());
-        paciente.setEmail(email.getText().toString());
-        paciente.setSenha(senha.getText().toString());
+        paciente.setEmail(user.getEmail());
 
         databaseReference.child("Paciente").child(paciente.getId()).setValue(paciente);
-
     }
-
-
 }
