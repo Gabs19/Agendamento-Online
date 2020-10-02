@@ -2,6 +2,7 @@ package com.example.agendamento_online.Model;
 
 public class Consulta {
 
+    private String id;
     private String nomePaciente;
     private String tipoConsulta;
     private String data;
@@ -9,6 +10,15 @@ public class Consulta {
 //    private String medico;
     private String precisoes;
     private String Status;
+    private String id_paciente;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNomePaciente() {
         return nomePaciente;
@@ -56,5 +66,13 @@ public class Consulta {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getId_paciente() {
+        return id_paciente;
+    }
+
+    public void setId_paciente(String id_paciente) {
+        this.id_paciente = id_paciente;
     }
 }
