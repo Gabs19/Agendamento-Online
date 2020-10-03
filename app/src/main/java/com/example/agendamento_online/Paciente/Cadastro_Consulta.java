@@ -2,11 +2,14 @@ package com.example.agendamento_online.Paciente;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.agendamento_online.Home;
+import com.example.agendamento_online.Model.Consulta;
 import com.example.agendamento_online.R;
 import com.example.agendamento_online.authentication.Conexao;
 import com.google.firebase.FirebaseApp;
@@ -17,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.UUID;
 
-public class Consulta extends AppCompatActivity {
+public class Cadastro_Consulta extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseUser user;
@@ -45,7 +48,8 @@ public class Consulta extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cadastrarAgendamento();
-                finish();
+                Intent home = new Intent(Cadastro_Consulta.this, Home.class);
+                startActivity(home);
             }
         });
     }
@@ -58,14 +62,14 @@ public class Consulta extends AppCompatActivity {
     }
 
     private void inicializarFirebase() {
-        FirebaseApp.initializeApp(Consulta.this);
+        FirebaseApp.initializeApp(Cadastro_Consulta.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
 
 
     private void cadastrarAgendamento() {
-        com.example.agendamento_online.Model.Consulta consulta = new com.example.agendamento_online.Model.Consulta();
+        Consulta consulta = new Consulta();
 
         consulta.setId(UUID.randomUUID().toString());
         consulta.setNomePaciente(nomePaciente.getText().toString().trim());
@@ -76,7 +80,7 @@ public class Consulta extends AppCompatActivity {
         consulta.setPrecisoes("Aguarde confirmação do Medico.");
         consulta.setStatus("Ativo");
 
-        databaseReference.child("Consulta").child(consulta.getId()).setValue(consulta);
+        databaseReference.child("Paciente").child(user.getUid()).child("Consulta").child(consulta.getId()).setValue(consulta);
 
     }
 

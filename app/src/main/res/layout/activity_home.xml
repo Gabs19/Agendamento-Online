@@ -28,8 +28,23 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:text="Agendar consulta" />
+
+    <TextView
+        android:id="@+id/view_consulta"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="170dp"
+         />
+
+    <ListView
+        android:id="@+id/list_consulta"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"
+        android:layout_marginTop="170dp"
+        />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

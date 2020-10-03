@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <activity android:name=".Paciente.Consulta"></activity>
+        <activity android:name=".Paciente.Cadastro_Consulta"></activity>
         <activity android:name=".Paciente.Dados_Cadastrais" />
         <activity android:name=".Paciente.Reset_senha" />
         <activity android:name=".Paciente.Login_Paciente" />
