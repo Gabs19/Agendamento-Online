@@ -3,14 +3,17 @@ package com.example.agendamento_online;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.agendamento_online.Model.Consulta;
 import com.example.agendamento_online.Paciente.Cadastro_Consulta;
 import com.example.agendamento_online.authentication.Conexao;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,11 +35,13 @@ public class Home extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference databaseReference;
 
-    TextView view_nome,view_consulta;
+    TextView view_nome;
     ListView list_consulta;
 
-    private List<String> consultas = new ArrayList<String>();
-    private ArrayAdapter<String> consultaArrayAdapter;
+    private List<Consulta> consultas = new ArrayList<Consulta>();
+    private ArrayAdapter<Consulta> consultaArrayAdapter;
+
+    Consulta consultaSelecionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,6 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         view_nome = (TextView) findViewById(R.id.view_nome);
-        view_consulta = (TextView) findViewById(R.id.view_consulta);
         list_consulta = (ListView) findViewById(R.id.list_consulta);
 
         Button logout = (Button) findViewById(R.id.logout);
@@ -68,6 +72,20 @@ public class Home extends AppCompatActivity {
                 startActivity(agendamento);
             }
         });
+
+        list_consulta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                consultaSelecionada = (Consulta)parent.getItemAtPosition(position);
+                String nome = consultaSelecionada.getNomePaciente();
+                String data = consultaSelecionada.getData();
+                String horario = consultaSelecionada.getHorario();
+
+                read(nome,data,horario);
+
+            }
+        });
+
     }
 
     protected void onStart() {
@@ -86,7 +104,7 @@ public class Home extends AppCompatActivity {
             Intent principal = new Intent(Home.this, MainActivity.class);
             startActivity(principal);
         } else {
-
+            //mostra o nome do usuario Logado
             DatabaseReference reference = database.getReference().child("Paciente").child(user.getUid());
 
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -102,7 +120,7 @@ public class Home extends AppCompatActivity {
                 }
             });
 
-
+            //mostra as consultas cadastrada desse usuario
             DatabaseReference consultaReferente = database.getReference().child("Paciente").child(user.getUid()).child("Consulta");
 
             consultaReferente.addValueEventListener(new ValueEventListener() {
@@ -112,18 +130,29 @@ public class Home extends AppCompatActivity {
                     for (DataSnapshot obj : snapshot.getChildren()) {
                         String status = obj.child("status").getValue(String.class);
                         if (status.equals("Ativo")) {
-                            String nome = obj.child("nomePaciente").getValue(String.class);
-                            consultas.add(nome);
+                            Consulta consulta = obj.getValue(Consulta.class);
+
+                            consultas.add(consulta);
                         }
                     }
-                    consultaArrayAdapter = new ArrayAdapter<String>(Home.this, android.R.layout.simple_list_item_1,consultas);
+                    consultaArrayAdapter = new ArrayAdapter<Consulta>(Home.this, android.R.layout.simple_list_item_1,consultas);
                     list_consulta.setAdapter(consultaArrayAdapter);
+
 
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) { }
             });
         }
+    }
+
+    private void read(String nome, String data, String horario) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+        builder.setTitle("Consulta");
+        builder.setMessage("Nome do paciente: " + nome + "\nData da consulta : " + data + "\nHorario da consulta : " + horario);
+        builder.create();
+        builder.show();
     }
 
 }

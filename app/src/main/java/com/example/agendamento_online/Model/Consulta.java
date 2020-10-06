@@ -75,4 +75,10 @@ public class Consulta {
     public void setId_paciente(String id_paciente) {
         this.id_paciente = id_paciente;
     }
+
+    //Metodo que faz mostrar o nome do paciente em vez, no list view quando chamo o objeto pessoa.
+    @Override
+    public String toString() {
+        return nomePaciente ;
+    }
 }

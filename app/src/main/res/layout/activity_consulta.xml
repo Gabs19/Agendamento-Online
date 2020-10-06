@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="time"
+        android:inputType="date"
         android:layout_marginTop="190dp"
         android:layout_marginLeft="50dp"/>
 
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date"
+        android:inputType="time"
         android:layout_marginTop="260dp"
         android:layout_marginLeft="50dp"/>
 

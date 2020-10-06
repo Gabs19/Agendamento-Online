@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.agendamento_online.Home;
 import com.example.agendamento_online.Model.Consulta;
@@ -40,16 +41,12 @@ public class Cadastro_Consulta extends AppCompatActivity {
         data = findViewById(R.id.data);
         horario = findViewById(R.id.horario);
 
-        inicializarFirebase();
-
         Button agendar = (Button) findViewById(R.id.cadastrar_agendamento);
 
         agendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cadastrarAgendamento();
-                Intent home = new Intent(Cadastro_Consulta.this, Home.class);
-                startActivity(home);
             }
         });
     }
@@ -58,15 +55,9 @@ public class Cadastro_Consulta extends AppCompatActivity {
         super.onStart();
         auth = Conexao.getFirebaseAuth();
         user = Conexao.getFirebaseUser();
-
-    }
-
-    private void inicializarFirebase() {
-        FirebaseApp.initializeApp(Cadastro_Consulta.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
     }
-
 
     private void cadastrarAgendamento() {
         Consulta consulta = new Consulta();
@@ -80,8 +71,25 @@ public class Cadastro_Consulta extends AppCompatActivity {
         consulta.setPrecisoes("Aguarde confirmação do Medico.");
         consulta.setStatus("Ativo");
 
-        databaseReference.child("Paciente").child(user.getUid()).child("Consulta").child(consulta.getId()).setValue(consulta);
+        String horario [] = consulta.getHorario().split(":");
+        int hora = Integer.parseInt(horario[0]);
+        int minuto = Integer.parseInt(horario[1]);
 
+        String data [] = consulta.getData().split("/");
+        int dia = Integer.parseInt(data[0]);
+        int mes = Integer.parseInt(data[1]);
+        int ano = Integer.parseInt(data[2]);
+
+        if((dia >= 1 && dia <= 31) && (mes >= 1 && mes <= 12) && (ano >= 2020)){
+            if ((hora >= 7 && hora <= 17) && (minuto >= 0 && minuto <= 59)) {
+                databaseReference.child("Paciente").child(user.getUid()).child("Consulta").child(consulta.getId()).setValue(consulta);
+                Intent home = new Intent(Cadastro_Consulta.this, Home.class);
+                startActivity(home);
+            } else { alert("Formato de Horario errado. Por favor, adicione entre 07:00 ~ 17:00"); }
+        } else { alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa."); }
     }
 
+    private void alert(String msg) {
+        Toast.makeText(Cadastro_Consulta.this,msg,Toast.LENGTH_SHORT).show();
+    }
 }
