@@ -1,55 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Paciente.Cadastro_Consulta">
 
-    <EditText
-        android:id="@+id/nome_paciente"
+
+    <TextView
+        android:id="@+id/marcar_consulta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
+        android:text="Marcar Consulta"
+        app:layout_constraintBottom_toTopOf="@+id/nome_paciente"
+        app:layout_constraintStart_toStartOf="@+id/nome_paciente"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/nome_paciente"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"/>
+        android:hint="Nome do Paciente"
+        app:layout_constraintBottom_toTopOf="@+id/tipo_consulta"
+        app:layout_constraintEnd_toEndOf="@+id/tipo_consulta"
+        app:layout_constraintStart_toStartOf="@+id/tipo_consulta"
+        app:layout_constraintTop_toBottomOf="@+id/marcar_consulta"/>
 
     <EditText
         android:id="@+id/tipo_consulta"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-        android:layout_marginTop="120dp"
-        android:layout_marginLeft="50dp"/>
+        android:hint="Tipo de Consulta"
+        app:layout_constraintBottom_toTopOf="@+id/data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nome_paciente"/>
 
     <EditText
         android:id="@+id/data"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="date"
-        android:layout_marginTop="190dp"
-        android:layout_marginLeft="50dp"/>
+        android:hint="dd/mm/aaaa"
+        app:layout_constraintBottom_toTopOf="@+id/horario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipo_consulta" />
 
     <EditText
         android:id="@+id/horario"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="time"
-        android:layout_marginTop="260dp"
-        android:layout_marginLeft="50dp"/>
+        android:hint = "HH:MM"
+        app:layout_constraintBottom_toTopOf="@+id/cadastrar_agendamento"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/data"  />
 
     <Button
         android:id="@+id/cadastrar_agendamento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="100dp"
         android:text="Agendar"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="50dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horario" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
