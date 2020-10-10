@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Agendamento_Online</string>
     <string name="dados_pessoais">Dados Pessoais</string>
+    <string name="agenda">Agenda</string>
+    <string name="perfil">Perfil</string>
+    <string name="ajuda">Ajuda</string>
+    <string name="sair">Sair</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="inicio">Inicio</string>
+    <string name="sobre">Sobre</string>
+    <string name="quem_somos">Quem somos</string>
+    <string name="informa_es">Informações</string>
 </resources>

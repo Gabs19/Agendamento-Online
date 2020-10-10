@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Paciente.Dados_Cadastrais">
@@ -12,77 +11,78 @@
         android:id="@+id/dados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginBottom="15dp"
-        android:text="Dados Pessoais"
-        app:layout_constraintBottom_toTopOf="@+id/nome"
-        app:layout_constraintStart_toStartOf="@+id/nome"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="50dp"
+        android:textColor="#060606"
+        android:text="Dados Pessoais" />
 
     <EditText
         android:id="@+id/nome"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="50dp"
         android:hint="Nome"
-        app:layout_constraintBottom_toTopOf="@+id/sobrenome"
-        app:layout_constraintEnd_toEndOf="@+id/sobrenome"
-        app:layout_constraintStart_toStartOf="@+id/sobrenome"
-        app:layout_constraintTop_toBottomOf="@+id/dados"/>
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/sobrenome"
         android:layout_width="300dp"
         android:layout_height="40dp"
+        android:layout_below="@+id/nome"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_marginEnd="50dp"
         android:hint="Sobrenome"
-        app:layout_constraintBottom_toTopOf="@+id/cpf"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nome"/>
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/cpf"
         android:layout_width="300dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="number"
+        android:layout_below="@+id/sobrenome"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="50dp"
         android:hint="000.111.222.-33"
-        app:layout_constraintBottom_toTopOf="@+id/celular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sobrenome" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/celular"
         android:layout_width="300dp"
         android:layout_height="40dp"
+        android:layout_below="@+id/cpf"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="phone"
-        android:hint = "(00) 9 0000-0000"
-        app:layout_constraintBottom_toTopOf="@+id/inserir"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cpf"  />
+        android:layout_marginEnd="50dp"
+        android:hint="(00) 9 0000-0000"
+        android:inputType="phone" />
 
     <Button
         android:id="@+id/inserir"
         android:layout_width="250dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="250dp"
-        android:text="Agendar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/celular" />
+        android:layout_below="@+id/celular"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="233dp"
+        android:text="Agendar" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

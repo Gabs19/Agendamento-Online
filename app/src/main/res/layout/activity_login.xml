@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Paciente.Login_Paciente">
@@ -11,42 +10,43 @@
         android:id="@+id/loign_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
         android:ems="10"
         android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:drawableEnd="@drawable/ic_mail"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/login_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_below="@+id/loign_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="Senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loign_email" />
+        android:drawableEnd="@drawable/ic_pass"
+        android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/reset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/login_pass"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="15dp"
-        android:text="Esqueceu sua senha?"
-        app:layout_constraintStart_toStartOf="@+id/login_pass"
-        app:layout_constraintTop_toBottomOf="@+id/login_pass" />
+        android:text="Esqueceu sua senha?" />
 
     <Button
         android:id="@+id/entrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_below="@+id/login_pass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
         android:text="Entrar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reset" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+         />
+</RelativeLayout>
