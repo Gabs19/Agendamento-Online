@@ -8,26 +8,28 @@
 
     <EditText
         android:id="@+id/loign_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="152dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableEnd="@drawable/ic_mail"
         android:ems="10"
         android:hint="E-mail"
-        android:drawableEnd="@drawable/ic_mail"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/login_pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/loign_email"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/rounded_edittext"
+        android:drawableEnd="@drawable/ic_pass"
         android:ems="10"
         android:hint="Senha"
-        android:drawableEnd="@drawable/ic_pass"
         android:inputType="textPassword" />
 
     <TextView
@@ -36,17 +38,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_pass"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="15dp"
-        android:text="Esqueceu sua senha?" />
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="13dp"
+        android:text="Esqueceu sua senha?"
+        android:textColor="#3949AB" />
 
     <Button
         android:id="@+id/entrar"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_pass"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:text="Entrar"
-         />
+        android:textColor="#fff"
+        android:background="@drawable/button_blue"
+        />
 </RelativeLayout>

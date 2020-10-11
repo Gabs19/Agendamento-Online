@@ -9,24 +9,29 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="245dp"
+        android:textColor="#fff"
         android:drawableStart="@drawable/ic_user"
-        android:text="Login" />
+        android:background="@drawable/button_blue"
+        android:text="Entrar" />
 
     <Button
         android:id="@+id/cadastrar"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="36dp"
         android:layout_marginBottom="152dp"
+        android:textColor="#fff"
+        android:textSize="15dp"
         android:drawableStart="@drawable/ic_add_user"
+        android:background="@drawable/button_red"
         android:text="Cadastro" />
 
 

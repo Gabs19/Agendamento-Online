@@ -24,15 +24,17 @@
 
     <item android:title="@string/informa_es">
         <menu>
-            <item
-                android:id="@+id/nav_us"
-                android:icon="@drawable/ic_us"
-                android:title="@string/quem_somos" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_us"
+                    android:icon="@drawable/ic_us"
+                    android:title="@string/quem_somos" />
 
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_help"
-                android:title="@string/sobre" />
+                <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_help"
+                    android:title="@string/sobre" />
+            </group>
         </menu>
     </item>
 

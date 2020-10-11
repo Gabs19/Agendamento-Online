@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import com.example.agendamento_online.Paciente.Fragment.AgendaFragment;
 import com.example.agendamento_online.Paciente.Fragment.HomePacienteFragment;
+import com.example.agendamento_online.Paciente.Fragment.SobreFragment;
 import com.example.agendamento_online.authentication.Conexao;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,8 +64,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 //                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomePacienteFragment()).commit();
 //                break;
             case R.id.nav_about:
-                Intent sobre = new Intent (this, Sobre.class);
-                startActivity(sobre);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SobreFragment()).commit();
+                break;
             case R.id.nav_sair:
                 Conexao.logOut();
                 Intent voltar = new Intent(this,MainActivity.class);

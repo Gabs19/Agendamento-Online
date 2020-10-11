@@ -7,10 +7,10 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="Agendamento Online"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Sobre"></activity>
         <activity android:name=".Paciente.Cadastro_Consulta" />
         <activity android:name=".Paciente.Dados_Cadastrais" />
         <activity android:name=".Paciente.Reset_senha" />

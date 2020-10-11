@@ -21,41 +21,45 @@
     <EditText
         android:id="@+id/nome_paciente"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:hint="Nome do Paciente"
+        android:hint=" Nome do Paciente"
+        android:background="@drawable/rounded_edittext"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/tipo_consulta"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/nome_paciente"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:hint="Tipo de Consulta"
+        android:hint=" Tipo de Consulta"
+        android:background="@drawable/rounded_edittext"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/data"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/tipo_consulta"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:hint="dd/mm/aaaa"
+        android:hint=" dd/mm/aaaa"
+        android:background="@drawable/rounded_edittext"
         android:inputType="date" />
 
     <EditText
         android:id="@+id/horario"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/data"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:hint="HH:MM"
+        android:hint=" HH:MM"
+        android:background="@drawable/rounded_edittext"
         android:inputType="time" />
 
     <Button
@@ -65,6 +69,8 @@
         android:layout_below="@+id/horario"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
+        android:textColor="#fff"
+        android:background="@drawable/button_green"
         android:text="Agendar"
         />
 

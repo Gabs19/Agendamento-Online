@@ -11,8 +11,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="27dp"
         android:layout_marginTop="114dp"
+        android:background="@drawable/button_green"
         android:drawableStart="@drawable/consulta_add"
-        android:text="Agendar consulta" />
+        android:text="Agendar consulta"
+        android:textColor="#ffff" />
 
     <ListView
         android:id="@+id/list_consulta"
