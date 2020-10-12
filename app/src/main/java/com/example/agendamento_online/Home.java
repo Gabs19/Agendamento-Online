@@ -9,15 +9,22 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.example.agendamento_online.Medico.Login_Medico;
 import com.example.agendamento_online.Paciente.Fragment.AgendaFragment;
 import com.example.agendamento_online.Paciente.Fragment.HomePacienteFragment;
+import com.example.agendamento_online.Paciente.Fragment.NosFragment;
 import com.example.agendamento_online.Paciente.Fragment.SobreFragment;
 import com.example.agendamento_online.authentication.Conexao;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,7 +53,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         toggle.syncState();
 
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomePacienteFragment()).commit();
         }
     }
@@ -60,15 +67,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_index:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomePacienteFragment()).commit();
                 break;
-//            case R.id.nav_perfil:
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomePacienteFragment()).commit();
-//                break;
             case R.id.nav_about:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SobreFragment()).commit();
                 break;
+            case R.id.nav_us:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NosFragment()).commit();
+                break;
             case R.id.nav_sair:
                 Conexao.logOut();
-                Intent voltar = new Intent(this,MainActivity.class);
+                Intent voltar = new Intent(this, MainActivity.class);
                 startActivity(voltar);
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -96,11 +103,27 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     private void verificarUser() {
-
-        if (user == null) {
+        if (user == null ) {
             Intent principal = new Intent(Home.this, MainActivity.class);
             startActivity(principal);
+        } else {
+            DatabaseReference consultaReferente = database.getReference().child("Paciente").child(user.getUid());
+
+            consultaReferente.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    boolean veriicando = snapshot.child("cpf").exists();
+
+                    if (!veriicando) {
+                        Toast.makeText(Home.this,"Não é paciente, faça o login como medico",Toast.LENGTH_SHORT).show();
+                        Intent principal = new Intent(Home.this, Login_Medico.class);
+                        startActivity(principal);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
         }
     }
-
 }

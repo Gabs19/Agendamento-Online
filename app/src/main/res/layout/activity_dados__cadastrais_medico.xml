@@ -15,8 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="55dp"
         android:layout_marginTop="50dp"
-        android:textColor="#060606"
-        android:text="Dados Pessoais" />
+        android:text="Dados Pessoais"
+        android:textColor="#060606" />
 
     <EditText
         android:id="@+id/nome"
@@ -26,10 +26,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="50dp"
-        android:hint=" Nome"
         android:background="@drawable/rounded_edittext"
+        android:hint=" Nome"
         android:inputType="textPersonName" />
 
     <EditText
@@ -42,8 +42,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
-        android:hint=" Sobrenome"
         android:background="@drawable/rounded_edittext"
+        android:hint=" Sobrenome"
         android:inputType="textPersonName" />
 
     <EditText
@@ -56,8 +56,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="50dp"
-        android:hint="CRM"
         android:background="@drawable/rounded_edittext"
+        android:hint="CRM"
         android:inputType="number" />
 
     <EditText
@@ -74,19 +74,6 @@
         android:hint=" (00) 9 0000-0000"
         android:inputType="phone" />
 
-    <Button
-        android:id="@+id/inserir"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_below="@+id/especialidade"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="162dp"
-        android:text="Cadastar" />
 
     <EditText
         android:id="@+id/especialidade"
@@ -102,5 +89,20 @@
         android:hint="Especialidade"
         android:inputType="text" />
 
+    <Button
+        android:id="@+id/inserir"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/especialidade"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/button_green"
+        android:text="Cadastar"
+        android:textColor="#fff" />
 
 </RelativeLayout>

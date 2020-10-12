@@ -15,8 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="55dp"
         android:layout_marginTop="50dp"
-        android:textColor="#060606"
-        android:text="Dados Pessoais" />
+        android:text="Dados Pessoais"
+        android:textColor="#060606" />
 
     <EditText
         android:id="@+id/nome"
@@ -28,8 +28,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="124dp"
         android:layout_marginEnd="50dp"
-        android:hint=" Nome"
         android:background="@drawable/rounded_edittext"
+        android:hint=" Nome"
         android:inputType="textPersonName" />
 
     <EditText
@@ -42,8 +42,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
-        android:hint=" Sobrenome"
         android:background="@drawable/rounded_edittext"
+        android:hint=" Sobrenome"
         android:inputType="textPersonName" />
 
     <EditText
@@ -56,8 +56,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="50dp"
-        android:hint=" 000.111.222.-33"
         android:background="@drawable/rounded_edittext"
+        android:hint=" 000.111.222.-33"
         android:inputType="number" />
 
     <EditText
@@ -70,8 +70,8 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
-        android:hint=" (00) 9 0000-0000"
         android:background="@drawable/rounded_edittext"
+        android:hint=" (00) 9 0000-0000"
         android:inputType="phone" />
 
     <Button
@@ -83,10 +83,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="233dp"
-        android:text="Agendar" />
+        android:background="@drawable/button_green"
+        android:text="Agendar"
+        android:textColor="#fff" />
 
 
 </RelativeLayout>
