@@ -17,6 +17,12 @@
         <activity android:name=".Paciente.Login_Paciente" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Paciente.Registro_Paciente" />
+        <activity android:name=".Medico.Inicio" />
+        <activity android:name=".Medico.Login_Medico" />
+        <activity android:name=".Medico.Registro_Medico" />
+        <activity android:name=".Medico.Dados_Cadastrais_Medico" />
+        <activity android:name=".Medico.Reset_senha_medico" />
+        <activity android:name=".Medico.Home_medico" />
         <activity
             android:name=".Home"
             android:theme="@style/AppTheme.NoActionBar">

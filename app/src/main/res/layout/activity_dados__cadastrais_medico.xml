@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Medico.Dados_Cadastrais_Medico">
+
+
+    <TextView
+        android:id="@+id/dados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="50dp"
+        android:textColor="#060606"
+        android:text="Dados Pessoais" />
+
+    <EditText
+        android:id="@+id/nome"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="50dp"
+        android:hint=" Nome"
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/sobrenome"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/nome"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:hint=" Sobrenome"
+        android:background="@drawable/rounded_edittext"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/registro"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/sobrenome"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="50dp"
+        android:hint="CRM"
+        android:background="@drawable/rounded_edittext"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/celular"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/registro"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint=" (00) 9 0000-0000"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/inserir"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/especialidade"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="162dp"
+        android:text="Cadastar" />
+
+    <EditText
+        android:id="@+id/especialidade"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/celular"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="Especialidade"
+        android:inputType="text" />
+
+
+</RelativeLayout>
