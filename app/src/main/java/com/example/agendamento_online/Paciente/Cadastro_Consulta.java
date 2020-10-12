@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,17 +22,24 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.UUID;
 
 public class Cadastro_Consulta extends AppCompatActivity {
+
+    private String[] tiposConsulta = new String[] {
+            "Clínica Geral","Cardiologia","Gastroentereologia","Obstetrícia","Pediatria","Ortopedia","Fonoaudiologia",
+            "Endocrinologia","Pneumologia","Urologia","Dermatologia","Oftalmologia","Otorrinolaringologia","Neurologia"};
 
     FirebaseAuth auth;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
-    TextView nomePaciente, tipoConsulta, data, horario;
+    TextView nomePaciente, data, horario;
+    private Spinner tipoConsulta;
 
+    private String c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +47,26 @@ public class Cadastro_Consulta extends AppCompatActivity {
         setContentView(R.layout.activity_consulta);
 
         nomePaciente = findViewById(R.id.nome_paciente);
-        tipoConsulta = findViewById(R.id.tipo_consulta);
         data = findViewById(R.id.data);
         horario = findViewById(R.id.horario);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,tiposConsulta);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        tipoConsulta = (Spinner) findViewById(R.id.tipo_consulta);
+        tipoConsulta.setAdapter(adapter);
+
+        tipoConsulta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                c = tiposConsulta[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         Button agendar = (Button) findViewById(R.id.cadastrar_agendamento);
 
@@ -64,7 +91,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
 
         consulta.setId(UUID.randomUUID().toString());
         consulta.setNomePaciente(nomePaciente.getText().toString().trim());
-        consulta.setTipoConsulta(tipoConsulta.getText().toString().trim());
+        consulta.setTipoConsulta(c.trim());
         consulta.setData(data.getText().toString().trim());
         consulta.setHorario(horario.getText().toString().trim());
         consulta.setId_paciente(user.getUid());
@@ -80,13 +107,20 @@ public class Cadastro_Consulta extends AppCompatActivity {
         int mes = Integer.parseInt(data[1]);
         int ano = Integer.parseInt(data[2]);
 
-        if((dia >= 1 && dia <= 31) && (mes >= 1 && mes <= 12) && (ano >= 2020)){
-            if ((hora >= 7 && hora <= 17) && (minuto >= 0 && minuto <= 59)) {
-                databaseReference.child("Paciente").child(user.getUid()).child("Consulta").child(consulta.getId()).setValue(consulta);
-                Intent home = new Intent(Cadastro_Consulta.this, Home.class);
-                startActivity(home);
-            } else { alert("Formato de Horario errado. Por favor, adicione entre 07:00 ~ 17:00"); }
+        final Calendar c = Calendar.getInstance();
+
+        if(ano >= c.get(Calendar.YEAR)){
+            if(mes >= c.get(Calendar.MONTH) || (mes < c.get(Calendar.MONTH) && ano > c.get(Calendar.YEAR))){
+                if(dia > c.get(Calendar.DAY_OF_MONTH)) {
+                    if ((hora >= 7 && hora < 12 || hora >= 13 && hora <= 17) && (minuto >= 0 && minuto <= 59)) {
+                        databaseReference.child("Paciente").child(user.getUid()).child("Consulta").child(consulta.getId()).setValue(consulta);
+                        Intent home = new Intent(Cadastro_Consulta.this, Home.class);
+                        startActivity(home);
+                    } else { alert("Formato de Horario errado. Por favor, adicione entre 07:00 ~ 17:00"); }
+                }else { alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa."); }
+            } else { alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa."); }
         } else { alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa."); }
+
     }
 
     private void alert(String msg) {

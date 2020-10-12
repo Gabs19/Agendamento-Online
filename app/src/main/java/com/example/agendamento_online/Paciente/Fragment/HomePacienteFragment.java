@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class HomePacienteFragment extends Fragment {
@@ -69,8 +70,9 @@ public class HomePacienteFragment extends Fragment {
                 String nome = consultaSelecionada.getNomePaciente();
                 String data = consultaSelecionada.getData();
                 String horario = consultaSelecionada.getHorario();
+                String consulta = consultaSelecionada.getTipoConsulta();
 
-                read(nome, data, horario);
+                read(nome, data, horario,consulta);
 
             }
         });
@@ -104,7 +106,6 @@ public class HomePacienteFragment extends Fragment {
                         String status = obj.child("status").getValue(String.class);
                         if (status.equals("Ativo")) {
                             Consulta consulta = obj.getValue(Consulta.class);
-
                             consultas.add(consulta);
                         }
                     }
@@ -119,11 +120,11 @@ public class HomePacienteFragment extends Fragment {
         }
     }
 
-    private void read(String nome, String data, String horario) {
+    private void read(String nome, String data, String horario,String consulta) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Consulta");
-        builder.setMessage("Nome do paciente: " + nome + "\nData da consulta : " + data + "\nHorario da consulta : " + horario);
+        builder.setMessage("Nome do paciente : " + nome + "\nConsulta : " + consulta + "\nData da consulta : " + data + "\nHorario da consulta : " + horario);
         builder.create();
         builder.show();
     }

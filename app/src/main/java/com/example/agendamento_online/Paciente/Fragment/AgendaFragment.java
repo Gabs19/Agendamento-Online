@@ -58,8 +58,9 @@ public class AgendaFragment extends Fragment {
                 String data = consultaSelecionada.getData();
                 String horario = consultaSelecionada.getHorario();
                 String status = consultaSelecionada.getStatus();
+                String consulta = consultaSelecionada.getTipoConsulta();
 
-                read(nome, data, horario,status);
+                read(nome, data, horario,status,consulta);
 
             }
         });
@@ -104,11 +105,11 @@ public class AgendaFragment extends Fragment {
         }
     }
 
-    private void read(String nome, String data, String horario,String status) {
+    private void read(String nome, String data, String horario,String status,String consulta) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Consulta");
-        builder.setMessage("Nome do paciente: " + nome + "\nData da consulta : " + data + "\nHorario da consulta : " + horario);
+        builder.setMessage("Nome do paciente : " + nome + "\nConsulta : " + consulta + "\nData da consulta : " + data + "\nHorario da consulta : " + horario);
         if(status.equals("Ativo") || status.equals("ativo")) {
             builder.setIcon(R.drawable.ic_ativo);
         } else {
