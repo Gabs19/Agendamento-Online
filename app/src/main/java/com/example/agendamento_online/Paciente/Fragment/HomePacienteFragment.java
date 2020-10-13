@@ -96,25 +96,48 @@ public class HomePacienteFragment extends Fragment {
             startActivity(principal);
         } else {
             //mostra as consultas cadastrada desse usuario
-            DatabaseReference consultaReferente = database.getReference().child("Paciente").child(user.getUid()).child("Consulta");
+//            DatabaseReference consultaReferente = database.getReference().child("Paciente").child(user.getUid()).child("Consulta");
+//
+//            consultaReferente.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    consultas.clear();
+//                    for (DataSnapshot obj : snapshot.getChildren()) {
+//                        String status = obj.child("status").getValue(String.class);
+//                        if (status.equals("Ativo")) {
+//                            Consulta consulta = obj.getValue(Consulta.class);
+//                            consultas.add(consulta);
+//                        }
+//                    }
+//                    consultaArrayAdapter = new ArrayAdapter<Consulta>(getActivity(), android.R.layout.simple_list_item_1, consultas);
+//                    list_consulta.setAdapter(consultaArrayAdapter);
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//                }
+//            });
+            DatabaseReference consultaRefence = database.getReference().child("Consulta");
 
-            consultaReferente.addValueEventListener(new ValueEventListener() {
+            consultaRefence.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    consultas.clear();
-                    for (DataSnapshot obj : snapshot.getChildren()) {
-                        String status = obj.child("status").getValue(String.class);
-                        if (status.equals("Ativo")) {
+                    for(DataSnapshot obj : snapshot.getChildren()) {
+                        String id_paciente = obj.child("id_paciente").getValue(String.class);
+                        System.out.println(id_paciente);
+                        if (id_paciente.equals(user.getUid())){
                             Consulta consulta = obj.getValue(Consulta.class);
                             consultas.add(consulta);
                         }
+
+                        consultaArrayAdapter = new ArrayAdapter<Consulta>(getActivity(), android.R.layout.simple_list_item_1, consultas);
+                        list_consulta.setAdapter(consultaArrayAdapter);
                     }
-                    consultaArrayAdapter = new ArrayAdapter<Consulta>(getActivity(), android.R.layout.simple_list_item_1, consultas);
-                    list_consulta.setAdapter(consultaArrayAdapter);
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+
                 }
             });
         }

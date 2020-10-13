@@ -114,6 +114,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
                 if(dia > c.get(Calendar.DAY_OF_MONTH)) {
                     if ((hora >= 7 && hora < 12 || hora >= 13 && hora <= 17) && (minuto >= 0 && minuto <= 59)) {
                         databaseReference.child("Paciente").child(user.getUid()).child("Consulta").child(consulta.getId()).setValue(consulta);
+                        databaseReference.child("Consulta").child(consulta.getId()).setValue(consulta);
                         Intent home = new Intent(Cadastro_Consulta.this, Home.class);
                         startActivity(home);
                     } else { alert("Formato de Horario errado. Por favor, adicione entre 07:00 ~ 17:00"); }

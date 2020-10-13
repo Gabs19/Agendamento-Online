@@ -82,20 +82,24 @@ public class AgendaFragment extends Fragment {
             Intent principal = new Intent(getActivity(), MainActivity.class);
             startActivity(principal);
         } else {
-            //mostra as consultas cadastrada desse usuario
-            DatabaseReference consultaReferente = database.getReference().child("Paciente").child(user.getUid()).child("Consulta");
+            DatabaseReference consultaRefence = database.getReference().child("Consulta");
 
-            consultaReferente.addValueEventListener(new ValueEventListener() {
+            consultaRefence.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    consultas.clear();
-                    for (DataSnapshot obj : snapshot.getChildren()) {
+                    for(DataSnapshot obj : snapshot.getChildren()) {
+                        String id_paciente = obj.child("id_paciente").getValue(String.class);
                         String status = obj.child("status").getValue(String.class);
-                            Consulta consulta = obj.getValue(Consulta.class);
-                            consultas.add(consulta);
+                        if (id_paciente.equals(user.getUid())){
+                            if(status.equals("Ativo")) {
+                                Consulta consulta = obj.getValue(Consulta.class);
+                                consultas.add(consulta);
+                            }
+                        }
+
+                        consultaArrayAdapter = new ArrayAdapter<Consulta>(getActivity(), android.R.layout.simple_list_item_1, consultas);
+                        list_consulta.setAdapter(consultaArrayAdapter);
                     }
-                    consultaArrayAdapter = new ArrayAdapter<Consulta>(getActivity(), android.R.layout.simple_list_item_1, consultas);
-                    list_consulta.setAdapter(consultaArrayAdapter);
                 }
 
                 @Override
