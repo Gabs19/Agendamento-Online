@@ -16,9 +16,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
         android:background="@drawable/rounded_edittext"
-        android:drawableEnd="@drawable/ic_mail"
+        android:drawableStart="@drawable/ic_mail"
         android:ems="10"
-        android:hint="E-mail"
+        android:hint=" E-mail"
         android:inputType="textEmailAddress" />
 
     <Button

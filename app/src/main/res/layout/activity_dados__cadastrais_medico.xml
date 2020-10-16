@@ -96,13 +96,11 @@
         android:layout_below="@+id/especialidade"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="80dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="80dp"
-        android:layout_marginBottom="200dp"
         android:background="@drawable/button_green"
-        android:text="Cadastar"
+        android:text="Salvar"
         android:textColor="#fff" />
 
 </RelativeLayout>

@@ -14,9 +14,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="152dp"
         android:background="@drawable/rounded_edittext"
-        android:drawableEnd="@drawable/ic_mail"
+        android:drawableStart="@drawable/ic_mail"
         android:ems="10"
-        android:hint="E-mail"
+        android:hint=" E-mail"
         android:inputType="textEmailAddress" />
 
     <EditText
@@ -27,9 +27,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
         android:background="@drawable/rounded_edittext"
-        android:drawableEnd="@drawable/ic_pass"
+        android:drawableStart="@drawable/ic_pass"
         android:ems="10"
-        android:hint="Senha"
+        android:hint=" Senha"
         android:inputType="textPassword" />
 
     <TextView

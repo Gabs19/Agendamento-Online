@@ -49,7 +49,7 @@ public class HomePacienteFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home_paciente, container,false);
+        View view = inflater.inflate(R.layout.fragment_home_paciente, container, false);
 
         list_consulta = (ListView) view.findViewById(R.id.list_consulta);
 
@@ -72,7 +72,7 @@ public class HomePacienteFragment extends Fragment {
                 String horario = consultaSelecionada.getHorario();
                 String consulta = consultaSelecionada.getTipoConsulta();
 
-                read(nome, data, horario,consulta);
+                read(nome, data, horario, consulta);
 
             }
         });
@@ -122,10 +122,11 @@ public class HomePacienteFragment extends Fragment {
             consultaRefence.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot obj : snapshot.getChildren()) {
+                    consultas.clear();
+                    for (DataSnapshot obj : snapshot.getChildren()) {
                         String id_paciente = obj.child("id_paciente").getValue(String.class);
                         System.out.println(id_paciente);
-                        if (id_paciente.equals(user.getUid())){
+                        if (id_paciente.equals(user.getUid())) {
                             Consulta consulta = obj.getValue(Consulta.class);
                             consultas.add(consulta);
                         }
@@ -143,7 +144,7 @@ public class HomePacienteFragment extends Fragment {
         }
     }
 
-    private void read(String nome, String data, String horario,String consulta) {
+    private void read(String nome, String data, String horario, String consulta) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Consulta");

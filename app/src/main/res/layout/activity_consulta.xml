@@ -25,8 +25,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:hint=" Nome do Paciente"
         android:background="@drawable/rounded_edittext"
+        android:hint=" Nome do Paciente"
         android:inputType="textPersonName" />
 
     <Spinner
@@ -36,7 +36,6 @@
         android:layout_below="@+id/nome_paciente"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:hint=" Tipo de Consulta"
         android:background="@drawable/rounded_edittext"
         android:inputType="textPersonName" />
 
@@ -47,8 +46,8 @@
         android:layout_below="@+id/tipo_consulta"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:hint=" dd/mm/aaaa"
         android:background="@drawable/rounded_edittext"
+        android:hint=" dd/mm/aaaa"
         android:inputType="date" />
 
     <EditText
@@ -58,8 +57,8 @@
         android:layout_below="@+id/data"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:hint=" HH:MM"
         android:background="@drawable/rounded_edittext"
+        android:hint=" HH:MM"
         android:inputType="time" />
 
     <Button
@@ -69,10 +68,9 @@
         android:layout_below="@+id/horario"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:textColor="#fff"
         android:background="@drawable/button_green"
         android:text="Agendar"
-        />
+        android:textColor="#fff" />
 
 
 </RelativeLayout>

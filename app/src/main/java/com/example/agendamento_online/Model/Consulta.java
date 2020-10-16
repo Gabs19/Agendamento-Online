@@ -52,6 +52,10 @@ public class Consulta {
         this.horario = horario;
     }
 
+//    public String getMedico() { return medico;}
+//
+//    public void setMedico(String medico) { this.medico = medico;}
+
     public String getPrecisoes() {
         return precisoes;
     }

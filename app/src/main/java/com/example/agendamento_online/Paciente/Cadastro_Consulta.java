@@ -16,7 +16,6 @@ import com.example.agendamento_online.Home;
 import com.example.agendamento_online.Model.Consulta;
 import com.example.agendamento_online.R;
 import com.example.agendamento_online.authentication.Conexao;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -27,9 +26,9 @@ import java.util.UUID;
 
 public class Cadastro_Consulta extends AppCompatActivity {
 
-    private String[] tiposConsulta = new String[] {
-            "Clínica Geral","Cardiologia","Gastroentereologia","Obstetrícia","Pediatria","Ortopedia","Fonoaudiologia",
-            "Endocrinologia","Pneumologia","Urologia","Dermatologia","Oftalmologia","Otorrinolaringologia","Neurologia"};
+    private String[] tiposConsulta = new String[]{"Escolha sua consulta: ",
+            "Clínica Geral", "Cardiologia", "Gastroentereologia", "Obstetrícia", "Pediatria", "Ortopedia", "Fonoaudiologia",
+            "Endocrinologia", "Pneumologia", "Urologia", "Dermatologia", "Oftalmologia", "Otorrinolaringologia", "Neurologia"};
 
     FirebaseAuth auth;
     FirebaseUser user;
@@ -39,7 +38,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
     TextView nomePaciente, data, horario;
     private Spinner tipoConsulta;
 
-    private String c;
+    private String c, m;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
         data = findViewById(R.id.data);
         horario = findViewById(R.id.horario);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,tiposConsulta);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tiposConsulta);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         tipoConsulta = (Spinner) findViewById(R.id.tipo_consulta);
@@ -84,6 +83,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
         user = Conexao.getFirebaseUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
+
     }
 
     private void cadastrarAgendamento() {
@@ -98,33 +98,41 @@ public class Cadastro_Consulta extends AppCompatActivity {
         consulta.setPrecisoes("Aguarde confirmação do Medico.");
         consulta.setStatus("Ativo");
 
-        String horario [] = consulta.getHorario().split(":");
+        String horario[] = consulta.getHorario().split(":");
         int hora = Integer.parseInt(horario[0]);
         int minuto = Integer.parseInt(horario[1]);
 
-        String data [] = consulta.getData().split("/");
+        String data[] = consulta.getData().split("/");
         int dia = Integer.parseInt(data[0]);
         int mes = Integer.parseInt(data[1]);
         int ano = Integer.parseInt(data[2]);
 
         final Calendar c = Calendar.getInstance();
 
-        if(ano >= c.get(Calendar.YEAR)){
-            if(mes >= c.get(Calendar.MONTH) || (mes < c.get(Calendar.MONTH) && ano > c.get(Calendar.YEAR))){
-                if(dia > c.get(Calendar.DAY_OF_MONTH)) {
+        if (ano >= c.get(Calendar.YEAR)) {
+            if (mes >= c.get(Calendar.MONTH) || (mes < c.get(Calendar.MONTH) && ano > c.get(Calendar.YEAR))) {
+                if (dia > c.get(Calendar.DAY_OF_MONTH)) {
                     if ((hora >= 7 && hora < 12 || hora >= 13 && hora <= 17) && (minuto >= 0 && minuto <= 59)) {
-                        databaseReference.child("Paciente").child(user.getUid()).child("Consulta").child(consulta.getId()).setValue(consulta);
                         databaseReference.child("Consulta").child(consulta.getId()).setValue(consulta);
                         Intent home = new Intent(Cadastro_Consulta.this, Home.class);
                         startActivity(home);
-                    } else { alert("Formato de Horario errado. Por favor, adicione entre 07:00 ~ 17:00"); }
-                }else { alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa."); }
-            } else { alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa."); }
-        } else { alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa."); }
+                    } else {
+                        alert("Formato de Horario errado. Por favor, adicione entre 07:00 ~ 17:00");
+                    }
+                } else {
+                    alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa.");
+                }
+            } else {
+                alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa.");
+            }
+        } else {
+            alert("Formato da data errado. Por favor, adicione formato dd/mm/aaaa.");
+        }
 
     }
 
+
     private void alert(String msg) {
-        Toast.makeText(Cadastro_Consulta.this,msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(Cadastro_Consulta.this, msg, Toast.LENGTH_SHORT).show();
     }
 }
