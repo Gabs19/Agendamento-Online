@@ -11,6 +11,19 @@ public abstract class Usuario {
     private String senha;
     private String celular;
 
+    public Usuario() {
+
+    }
+
+    public Usuario(String id, String nome, String sobrenome, String email, String senha, String celular) {
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.email = email;
+        this.senha = senha;
+        this.celular = celular;
+    }
+
     public String getId() {
         return id;
     }
@@ -59,4 +72,8 @@ public abstract class Usuario {
         this.celular = celular;
     }
 
+    @Override
+    public String toString() {
+        return  nome;
+    }
 }

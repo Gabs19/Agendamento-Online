@@ -1,5 +1,6 @@
 package com.example.agendamento_online.Paciente;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,21 +15,30 @@ import android.widget.Toast;
 
 import com.example.agendamento_online.Home;
 import com.example.agendamento_online.Model.Consulta;
+import com.example.agendamento_online.Model.Medico;
 import com.example.agendamento_online.R;
 import com.example.agendamento_online.authentication.Conexao;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
 public class Cadastro_Consulta extends AppCompatActivity {
 
-    private String[] tiposConsulta = new String[]{"Escolha sua consulta: ",
-            "Clínica Geral", "Cardiologia", "Gastroentereologia", "Obstetrícia", "Pediatria", "Ortopedia", "Fonoaudiologia",
+    private final String[] tiposConsulta = new String[]{"Escolha sua consulta: ",
+            "Clínica Geral", "Cardiologia", "Gastroentereologia", "Obstetrícia", "Pediatra", "Ortopedia", "Fonoaudiologia",
             "Endocrinologia", "Pneumologia", "Urologia", "Dermatologia", "Oftalmologia", "Otorrinolaringologia", "Neurologia"};
+
+
+    private ArrayList<Medico> medicos = new ArrayList<Medico>();
+    private ArrayAdapter<Medico> medicoArrayAdapter;
 
     FirebaseAuth auth;
     FirebaseUser user;
@@ -36,9 +46,12 @@ public class Cadastro_Consulta extends AppCompatActivity {
     DatabaseReference databaseReference;
 
     TextView nomePaciente, data, horario;
-    private Spinner tipoConsulta;
 
-    private String c, m;
+    Spinner medicoRegistrado, tipoConsulta;
+
+    private String testando, c;
+    private String medico;
+    Medico medicoSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +62,39 @@ public class Cadastro_Consulta extends AppCompatActivity {
         data = findViewById(R.id.data);
         horario = findViewById(R.id.horario);
 
+        ///combobox de consultas
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tiposConsulta);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         tipoConsulta = (Spinner) findViewById(R.id.tipo_consulta);
         tipoConsulta.setAdapter(adapter);
 
-        tipoConsulta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        AdapterView.OnItemSelectedListener consultas = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                c = tiposConsulta[position];
+                testando = tipoConsulta.getSelectedItem().toString();
+                System.out.println(testando);
+                c = testando;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
+
+        tipoConsulta.setOnItemSelectedListener(consultas);
+
+
+        //combobox de medico
+
+        medicoRegistrado = (Spinner) findViewById(R.id.medico_registrado);
+
+        medicoRegistrado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                medicoSelecionado = (Medico) parent.getItemAtPosition(position);
+                medico = "Dr." + medicoSelecionado.getSobrenome();
+                Toast.makeText(Cadastro_Consulta.this, medico, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -66,6 +102,8 @@ public class Cadastro_Consulta extends AppCompatActivity {
 
             }
         });
+
+        ///botão onde cadastra a consulta
 
         Button agendar = (Button) findViewById(R.id.cadastrar_agendamento);
 
@@ -84,6 +122,36 @@ public class Cadastro_Consulta extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
+        medicosRegistrados();
+    }
+
+    void medicosRegistrados() {
+
+        System.out.println(c);
+
+        DatabaseReference medicoReference = firebaseDatabase.getReference().child("Medico");
+
+        medicoReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot obj : snapshot.getChildren()) {
+
+                    Medico nomeMedico = obj.getValue(Medico.class);
+                    medicos.add(nomeMedico);
+
+                }
+
+                medicoArrayAdapter = new ArrayAdapter<Medico>(Cadastro_Consulta.this, android.R.layout.simple_spinner_dropdown_item, medicos);
+                medicoRegistrado.setAdapter(medicoArrayAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private void cadastrarAgendamento() {
@@ -91,7 +159,8 @@ public class Cadastro_Consulta extends AppCompatActivity {
 
         consulta.setId(UUID.randomUUID().toString());
         consulta.setNomePaciente(nomePaciente.getText().toString().trim());
-        consulta.setTipoConsulta(c.trim());
+        consulta.setTipoConsulta(testando.trim());
+        consulta.setMedico(medico.trim());
         consulta.setData(data.getText().toString().trim());
         consulta.setHorario(horario.getText().toString().trim());
         consulta.setId_paciente(user.getUid());

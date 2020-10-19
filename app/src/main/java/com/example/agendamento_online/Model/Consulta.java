@@ -7,7 +7,7 @@ public class Consulta {
     private String tipoConsulta;
     private String data;
     private String horario;
-//    private String medico;
+    private String medico;
     private String precisoes;
     private String Status;
     private String id_paciente;
@@ -52,9 +52,9 @@ public class Consulta {
         this.horario = horario;
     }
 
-//    public String getMedico() { return medico;}
-//
-//    public void setMedico(String medico) { this.medico = medico;}
+    public String getMedico() { return medico;}
+
+    public void setMedico(String medico) { this.medico = medico;}
 
     public String getPrecisoes() {
         return precisoes;
