@@ -32,9 +32,8 @@ import java.util.UUID;
 
 public class Cadastro_Consulta extends AppCompatActivity {
 
-    private final String[] tiposConsulta = new String[]{"Escolha sua consulta: ",
-            "Clínica Geral", "Cardiologia", "Gastroentereologia", "Obstetrícia", "Pediatra", "Ortopedia", "Fonoaudiologia",
-            "Endocrinologia", "Pneumologia", "Urologia", "Dermatologia", "Oftalmologia", "Otorrinolaringologia", "Neurologia"};
+    private ArrayList<String> especialidades = new ArrayList<String>();
+    private ArrayAdapter<String> especialidadeArrayAdapter;
 
 
     private ArrayList<Medico> medicos = new ArrayList<Medico>();
@@ -47,11 +46,12 @@ public class Cadastro_Consulta extends AppCompatActivity {
 
     TextView nomePaciente, data, horario;
 
-    Spinner medicoRegistrado, tipoConsulta;
+    Spinner medicoRegistrado, especialidadeRegistrada;
 
-    private String testando, c;
+    private String especialidade, c;
     private String medico;
     Medico medicoSelecionado;
+    private String especialidadeSelecionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,26 +63,25 @@ public class Cadastro_Consulta extends AppCompatActivity {
         horario = findViewById(R.id.horario);
 
         ///combobox de consultas
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tiposConsulta);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, especialidadeRegistrada);
 
-        tipoConsulta = (Spinner) findViewById(R.id.tipo_consulta);
-        tipoConsulta.setAdapter(adapter);
+        especialidadeRegistrada = (Spinner) findViewById(R.id.tipo_consulta);
 
-        AdapterView.OnItemSelectedListener consultas = new AdapterView.OnItemSelectedListener() {
+        especialidadeRegistrada.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                testando = tipoConsulta.getSelectedItem().toString();
-                System.out.println(testando);
-                c = testando;
+                especialidadeSelecionada = (String) parent.getItemAtPosition(position);
+                especialidade = especialidadeSelecionada;
+                Toast.makeText(Cadastro_Consulta.this, especialidade, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        };
+        });
 
-        tipoConsulta.setOnItemSelectedListener(consultas);
+        //especialidadeRegistrada.setOnItemSelectedListener(consultas);
 
 
         //combobox de medico
@@ -123,6 +122,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference();
 
         medicosRegistrados();
+        especialidadesRegistradas();
     }
 
     void medicosRegistrados() {
@@ -154,12 +154,41 @@ public class Cadastro_Consulta extends AppCompatActivity {
 
     }
 
+    void especialidadesRegistradas() {
+
+        System.out.println(c);
+
+        DatabaseReference medicoReference = firebaseDatabase.getReference().child("Medico");
+
+        medicoReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot obj : snapshot.getChildren()) {
+
+                    String especialidadeMedico = obj.child("especialidade").getValue(String.class);
+                    especialidades.add(especialidadeMedico);
+
+                }
+
+                especialidadeArrayAdapter = new ArrayAdapter<String>(Cadastro_Consulta.this, android.R.layout.simple_spinner_dropdown_item, especialidades);
+                especialidadeRegistrada.setAdapter(especialidadeArrayAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     private void cadastrarAgendamento() {
         Consulta consulta = new Consulta();
 
         consulta.setId(UUID.randomUUID().toString());
         consulta.setNomePaciente(nomePaciente.getText().toString().trim());
-        consulta.setTipoConsulta(testando.trim());
+        consulta.setTipoConsulta(especialidade.trim());
         consulta.setMedico(medico.trim());
         consulta.setData(data.getText().toString().trim());
         consulta.setHorario(horario.getText().toString().trim());
