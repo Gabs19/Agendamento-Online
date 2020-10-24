@@ -24,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 especialidadeSelecionada = (String) parent.getItemAtPosition(position);
                 especialidade = especialidadeSelecionada;
+                pesquisarMedicos(especialidade);
                 Toast.makeText(Cadastro_Consulta.this, especialidade, Toast.LENGTH_SHORT).show();
             }
 
@@ -121,17 +123,19 @@ public class Cadastro_Consulta extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
 
-        medicosRegistrados();
         especialidadesRegistradas();
+
     }
 
-    void medicosRegistrados() {
+    void pesquisarMedicos(String especialidade) {
 
         System.out.println(c);
 
-        DatabaseReference medicoReference = firebaseDatabase.getReference().child("Medico");
+        Query medicoQuery = databaseReference.child("Medico").orderByChild("especialidade").equalTo(especialidade);
 
-        medicoReference.addValueEventListener(new ValueEventListener() {
+        medicos.clear();
+
+        medicoQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot obj : snapshot.getChildren()) {
