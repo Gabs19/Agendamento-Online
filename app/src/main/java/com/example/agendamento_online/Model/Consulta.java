@@ -11,6 +11,7 @@ public class Consulta {
     private String precisoes;
     private String Status;
     private String id_paciente;
+    private String id_medico;
 
     public String getId() {
         return id;
@@ -78,6 +79,14 @@ public class Consulta {
 
     public void setId_paciente(String id_paciente) {
         this.id_paciente = id_paciente;
+    }
+
+    public String getId_medico() {
+        return id_medico;
+    }
+
+    public void setId_medico(String id_medico) {
+        this.id_medico = id_medico;
     }
 
     //Metodo que faz mostrar o nome do paciente em vez, no list view quando chamo o objeto pessoa.

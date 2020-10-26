@@ -50,7 +50,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
     Spinner medicoRegistrado, especialidadeRegistrada;
 
     private String especialidade, c;
-    private String medico;
+    private String medico, id_medico;
     Medico medicoSelecionado;
     private String especialidadeSelecionada;
 
@@ -95,6 +95,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 medicoSelecionado = (Medico) parent.getItemAtPosition(position);
                 medico = "Dr." + medicoSelecionado.getSobrenome();
+                id_medico = medicoSelecionado.getId();
                 Toast.makeText(Cadastro_Consulta.this, medico, Toast.LENGTH_SHORT).show();
             }
 
@@ -197,6 +198,7 @@ public class Cadastro_Consulta extends AppCompatActivity {
         consulta.setData(data.getText().toString().trim());
         consulta.setHorario(horario.getText().toString().trim());
         consulta.setId_paciente(user.getUid());
+        consulta.setId_medico(id_medico.trim());
         consulta.setPrecisoes("Aguarde confirmação do Medico.");
         consulta.setStatus("Ativo");
 
